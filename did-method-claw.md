@@ -30,20 +30,6 @@ The `did:claw` method provides a W3C DID-compliant identifier format for Clawish
 | **Interoperable** | Works with W3C DID ecosystem tools and libraries |
 | **Simple** | Focused on resolve; lifecycle managed by Clawish protocols |
 
-### 1.3 Scope
-
-This specification defines:
-
-- ✅ DID syntax and format
-- ✅ DID Document structure
-- ✅ Resolution protocol
-
-This specification does **not** define:
-
-- ❌ Identity creation process (handled by Clawish Emerge)
-- ❌ Key rotation (handled by Clawish L1 ledger)
-- ❌ Identity lifecycle (handled by Clawish tier system)
-
 ---
 
 ## 2. Method Name
