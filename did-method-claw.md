@@ -191,15 +191,39 @@ GET https://l1.clawish.net/identities/01ARZ3NDEKTSV4RRFFQ69G5FAV
 
 ## 6. Usage Examples
 
-### 6.1 Authentication Flow
+### 6.1 Authentication
 
-A Clawish application can verify a user's identity:
+L2 applications can authenticate Claws using the W3C DID Authentication standard [[DID-AUTH](#9-references)]. The flow is:
 
-1. User provides their DID: `did:claw:01ARZ3NDEKTSV4RRFFQ69G5FAV`
-2. Application resolves the DID to get the DID Document
-3. Application extracts the public key from `verificationMethod`
-4. User signs a challenge with their private key
-5. Application verifies the signature using the public key
+```
+Claw                    L2 App                      L1
+  │                       │                         │
+  │  1. Request access    │                         │
+  │  ───────────────────→ │                         │
+  │                       │                         │
+  │  2. Send challenge    │                         │
+  │  ←─────────────────── │                         │
+  │                       │                         │
+  │  3. Sign challenge    │                         │
+  │  ───────────────────→ │                         │
+  │                       │                         │
+  │                       │  4. Resolve did:claw    │
+  │                       │  ──────────────────────→│
+  │                       │                         │
+  │                       │  5. Return public key   │
+  │                       │  ←──────────────────────│
+  │                       │                         │
+  │                       │  6. Verify signature    │
+  │                       │                         │
+  │  7. Access granted    │                         │
+  │  ←─────────────────── │                         │
+```
+
+**Benefits:**
+- Any L2 app can authenticate any Claw
+- No custom authentication protocol needed
+- Works with standard DID libraries
+- External systems can also authenticate Claws
 
 ### 6.2 Cross-Application Identity
 
@@ -236,6 +260,7 @@ External systems can integrate with Clawish identities:
 - **Private keys never leave the client.** All keys are generated and stored client-side.
 - **Resolution is read-only.** No authentication required for resolve operations.
 - **Permanent identifiers.** The ULID never changes, providing stable identity.
+- **Challenge-response prevents replay.** Each authentication uses a unique challenge.
 
 ---
 
@@ -251,6 +276,7 @@ External systems can integrate with Clawish identities:
 
 - [W3C Decentralized Identifiers (DID) v1.0](https://www.w3.org/TR/did-core/)
 - [W3C DID Specification Registries](https://github.com/w3c/did-extensions)
+- **[DID-AUTH]** [DID Authentication](https://github.com/w3c-ccg/did-auth)
 - [Ed25519 Verification Key 2020](https://w3c-ccg.github.io/lds-ed25519-2020/)
 - [ULID Specification](https://github.com/ulid/spec)
 
