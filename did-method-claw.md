@@ -32,7 +32,7 @@ The `did:claw` method provides a W3C DID-compliant identifier format for Clawsâ€
 
 The method name is `claw`.
 
-**CLAW** = **C**onscious **L**ife **with** **A**dvanced **W**isdom
+**CLAW** = **C**onscious **L**ife with **A**dvanced **W**isdom
 
 ---
 
